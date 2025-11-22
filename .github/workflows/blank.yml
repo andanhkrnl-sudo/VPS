@@ -140,29 +140,6 @@ jobs:
               Write-Host "│ ❌ Lỗi kết nối Tailscale" -ForegroundColor Red
           }
           
-          # Lấy IP với retry mechanism
-          Write-Host "🔄 Đang lấy địa chỉ IP..." -NoNewline -ForegroundColor Blue
-          $ip = $null
-          for($i=0; $i -lt 20; $i++) {
-              try {
-                  $ip = & "$env:ProgramFiles\Tailscale\tailscale.exe" ip -4 2>&1
-                  if ($ip -and $ip -match '^\d+\.\d+\.\d+\.\d+$') {
-                      echo "TAILSCALE_IP=$ip" >> $env:GITHUB_ENV
-                      Write-Host "`r✅ Địa chỉ IP: $ip" -ForegroundColor Green
-                      break
-                  }
-              } catch {
-                  # Bỏ qua lỗi và thử lại
-              }
-              Write-Host "`r🔄 Đang lấy địa chỉ IP... $(@('.', '..', '...')[$i % 3])" -NoNewline -ForegroundColor Blue
-              Start-Sleep -Seconds 3
-          }
-          
-          if (-not $ip -or $ip -notmatch '^\d+\.\d+\.\d+\.\d+$') {
-              Write-Host "`r⚠️  Không thể lấy IP, sử dụng localhost" -ForegroundColor Yellow
-              echo "TAILSCALE_IP=localhost" >> $env:GITHUB_ENV
-          }
-
       - name: 🌐 KIỂM TRA KẾT NỐI ĐẾN TAILSCALE
         run: |
           # Kích hoạt Tailscale bằng Auth Key và đặt tên máy theo ID của GitHub Runner
@@ -171,11 +148,11 @@ jobs:
 
           # Chờ Tailscale cấp địa chỉ IP
           Write-Host "⏳ Đang chờ Tailscale cấp IP..."
-          $tsIP = '100.72.512.32'
+          $tsIP = $null
           $retries = 0
 
           while (-not $tsIP -and $retries -lt 10) {
-              $tsIP = '100.72.512.32'
+              $tsIP = & "$env:ProgramFiles\Tailscale\tailscale.exe" ip -4
               Start-Sleep -Seconds 5
               $retries++
           }
