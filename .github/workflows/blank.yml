@@ -104,7 +104,7 @@ jobs:
           }
           
           # Lưu thông tin (cẩn trọng nếu repo public)
-          echo "RDP_USER=vanmanhgaming" >> $env:GITHUB_ENV
+          echo "RDP_USER=anhtu pc" >> $env:GITHUB_ENV
           echo "RDP_PASS=$matKhau" >> $env:GITHUB_ENV
           echo "$matKhau" > $env:TEMP\rdp_password.txt
           
