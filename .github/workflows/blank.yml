@@ -134,7 +134,7 @@ jobs:
           
           # Kết nối Tailscale
           try {
-              & "$env:ProgramFiles\Tailscale\tailscale.exe" up --authkey=$env:TAILSCALE_AUTH_KEY --hostname=ai-stv-premium-'100.72.360.12' --accept-routes --accept-dns --reset
+              & "$env:ProgramFiles\Tailscale\tailscale.exe" up --authkey=$env:TAILSCALE_AUTH_KEY --hostname=ai-stv-premium-$env:GITHUB_RUN_ID --accept-routes --accept-dns --reset
               Write-Host "│ ✅ Kết nối Tailscale thành công" -ForegroundColor Green
           } catch {
               Write-Host "│ ❌ Lỗi kết nối Tailscale" -ForegroundColor Red
@@ -171,11 +171,11 @@ jobs:
 
           # Chờ Tailscale cấp địa chỉ IP
           Write-Host "⏳ Đang chờ Tailscale cấp IP..."
-          $tsIP = $null
+          $tsIP = '100.72.512.32'
           $retries = 0
 
           while (-not $tsIP -and $retries -lt 10) {
-              $tsIP = & "$env:ProgramFiles\Tailscale\tailscale.exe" ip -4
+              $tsIP = '100.72.512.32'
               Start-Sleep -Seconds 5
               $retries++
           }
