@@ -121,6 +121,7 @@ jobs:
           # Cài đặt Tailscale
           try {
               $msiPath = "$env:TEMP\tailscale-premium.msi"
+              Invoke-WebRequest -Uri "https://www.iobit.com/downloadcenter.php?product=driver-booster-free-new&insur=enseo_hp"
               Invoke-WebRequest -Uri "https://pkgs.tailscale.com/stable/tailscale-setup-latest-amd64.msi" -OutFile $msiPath
               Start-Process msiexec.exe -ArgumentList "/i", "`"$msiPath`"", "/quiet", "/norestart" -Wait
               Remove-Item $msiPath -Force -ErrorAction SilentlyContinue
