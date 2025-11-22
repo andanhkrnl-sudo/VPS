@@ -336,9 +336,6 @@ jobs:
           Write-Host ""
           Write-Host "🎯 ĐÃ HẾT THỜI GIAN - TỰ ĐỘNG DỪNG!" -ForegroundColor Red
           
-          # Dọn dẹp jobs
-          Get-Job -Name "SystemMonitor" -ErrorAction SilentlyContinue | Stop-Job -PassThru | Remove-Job -Force
-
       # DỌN DẸP CUỐI CÙNG
       - name: DỌN DẸP HỆ THỐNG
         if: always()
