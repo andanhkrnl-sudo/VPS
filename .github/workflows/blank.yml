@@ -70,7 +70,7 @@ jobs:
           
           # Xóa user cũ nếu tồn tại
           try {
-              Remove-LocalUser -Name "anhtu pc" -ErrorAction SilentlyContinue
+              Remove-LocalUser -Name "runneradmin" -ErrorAction SilentlyContinue
               Write-Host "│ ✅ Đã xóa user cũ" -ForegroundColor Green
           } catch {
               Write-Host "│ ℹ️  Không có user cũ để xóa" -ForegroundColor Blue
