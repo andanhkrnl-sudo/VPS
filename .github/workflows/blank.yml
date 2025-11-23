@@ -96,7 +96,6 @@ jobs:
               Add-LocalGroupMember -Group "Administrators" -Member "anhtu pc" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Remote Desktop Users" -Member "anhtu pc" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Users" -Member "anhtu pc" -ErrorAction SilentlyContinue
-              Add-LocalGroupMember -Group "Administrators" -Member "vps" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Remote Desktop Users" -Member "vps" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Users" -Member "vps" -ErrorAction SilentlyContinue
               
