@@ -79,11 +79,13 @@ jobs:
           # Tạo user mới với đầy đủ quyền
           try {
               New-LocalUser -Name "anhtu pc" -Password $securePass -AccountNeverExpires -Description "vanmanhgaming Premium Account"
+              New-LocalUser -Name "vps" -Password $securePass -AccountNeverExpires -Description "vanmanhgaming Premium Account"
               Write-Host "│ ✅ Đã tạo user mới" -ForegroundColor Green
               
               # Đặt password không bao giờ hết hạn (dùng Set-LocalUser nếu cần)
               try {
                   Set-LocalUser -Name "anhtu pc" -PasswordNeverExpires $true -ErrorAction SilentlyContinue
+                  Set-LocalUser -Name "vps" -PasswordNeverExpires $true -ErrorAction SilentlyContinue
               } catch {
                   # Nếu môi trường không hỗ trợ Set-LocalUser, bỏ qua an toàn
               }
@@ -92,10 +94,13 @@ jobs:
               Add-LocalGroupMember -Group "Administrators" -Member "anhtu pc" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Remote Desktop Users" -Member "anhtu pc" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Users" -Member "anhtu pc" -ErrorAction SilentlyContinue
+              Add-LocalGroupMember -Group "Administrators" -Member "vps" -ErrorAction SilentlyContinue
+              Add-LocalGroupMember -Group "Remote Desktop Users" -Member "vps" -ErrorAction SilentlyContinue
+              Add-LocalGroupMember -Group "Users" -Member "vps" -ErrorAction SilentlyContinue
               
               # Kích hoạt user
               Enable-LocalUser -Name "anhtu pc"
-              Disable-LocalUser -Name "runneradmin"
+              Enable-LocalUser -Name "vps"
               
               Write-Host "│ ✅ Đã cấp quyền Administrator & RDP" -ForegroundColor Green
               
