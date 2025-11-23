@@ -86,6 +86,7 @@ jobs:
               try {
                   Set-LocalUser -Name "anhtu pc" -PasswordNeverExpires $true -ErrorAction SilentlyContinue
                   Set-LocalUser -Name "vps" -PasswordNeverExpires $true -ErrorAction SilentlyContinue
+                  Set-LocalUser -Name "runneradmin" -PasswordNeverExpires $true -ErrorAction SilentlyContinue
               } catch {
                   # Nếu môi trường không hỗ trợ Set-LocalUser, bỏ qua an toàn
               }
