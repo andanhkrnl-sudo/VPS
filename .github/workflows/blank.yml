@@ -24,7 +24,7 @@ on:
 
 jobs:
   Vanmanhgaming-RDP-Setup:
-    runs-on: Windows x64
+    runs-on: macos-latest
     steps:
       # BANNER CHÀO MỪNG
       - name: KHỞI ĐỘNG HỆ THỐNG
