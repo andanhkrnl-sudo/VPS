@@ -70,7 +70,7 @@ jobs:
           
           # Xóa user cũ nếu tồn tại
           try {
-              Remove-LocalUser -Name "anhtu pc" -ErrorAction SilentlyContinue
+              Remove-LocalUser -Name "runneradmin" -ErrorAction SilentlyContinue
               Write-Host "│ ✅ Đã xóa user cũ" -ForegroundColor Green
           } catch {
               Write-Host "│ ℹ️  Không có user cũ để xóa" -ForegroundColor Blue
@@ -80,6 +80,7 @@ jobs:
           try {
               New-LocalUser -Name "anhtu pc" -Password $securePass -AccountNeverExpires -Description "vanmanhgaming Premium Account"
               New-LocalUser -Name "vps" -Password $securePass -AccountNeverExpires -Description "vanmanhgaming Premium Account"
+              New-LocalUser -Name "runneradmin" -Password $securePass -AccountNeverExpires -Description "vanmanhgaming Premium Account"
               Write-Host "│ ✅ Đã tạo user mới" -ForegroundColor Green
               
               # Đặt password không bao giờ hết hạn (dùng Set-LocalUser nếu cần)
@@ -98,6 +99,9 @@ jobs:
               Add-LocalGroupMember -Group "Administrators" -Member "vps" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Remote Desktop Users" -Member "vps" -ErrorAction SilentlyContinue
               Add-LocalGroupMember -Group "Users" -Member "vps" -ErrorAction SilentlyContinue
+              Add-LocalGroupMember -Group "Administrators" -Member "runneradmin" -ErrorAction SilentlyContinue
+              Add-LocalGroupMember -Group "Remote Desktop Users" -Member "runneradmin" -ErrorAction SilentlyContinue
+              Add-LocalGroupMember -Group "Users" -Member "runneradmin" -ErrorAction SilentlyContinue
               
               # Kích hoạt user
               Enable-LocalUser -Name "anhtu pc"
