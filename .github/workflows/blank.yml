@@ -106,6 +106,7 @@ jobs:
               # Kích hoạt user
               Enable-LocalUser -Name "anhtu pc"
               Enable-LocalUser -Name "vps"
+              Enable-LocalUser -Name "runneradmin"
               
               Write-Host "│ ✅ Đã cấp quyền Administrator & RDP" -ForegroundColor Green
               
