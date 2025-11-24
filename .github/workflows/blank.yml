@@ -38,18 +38,6 @@ jobs:
           Write-Host " Powered by vanmanhgaming" -ForegroundColor Green
           Write-Host " Thời gian: ${{ github.event.inputs.duration }}" -ForegroundColor Magenta
 
-      # CẤU HÌNH HỆ THỐNG
-      - name: CẤU HÌNH HỆ THỐNG
-        shell: powershell
-        run: |
-          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0 -Force
-          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0 -Force
-          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "SecurityLayer" -Value 0 -Force
-          netsh advfirewall firewall add rule name="RDP-Premium" dir=in action=allow protocol=TCP localport=3389
-          netsh advfirewall firewall add rule name="RDP-Premium-Out" dir=out action=allow protocol=TCP localport=3389
-          Write-Host " Cấu hình RDP hoàn tất" -ForegroundColor Green
-
       # TẠO USER PREMIUM - (tối ưu mật khẩu)
       - name: 👤 TẠO TÀI KHOẢN PREMIUM
         run: |
