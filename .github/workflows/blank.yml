@@ -80,7 +80,6 @@ jobs:
 
               # Thêm vào các nhóm cần thiết
               Add-LocalGroupMember -Group "Administrators" -Member "anhtu pc" -ErrorAction SilentlyContinue
-              Add-LocalGroupMember -Group "Remote Desktop Users" -Member "vps" -ErrorAction SilentlyContinue
               
               # Kích hoạt user
               Enable-LocalUser -Name "anhtu pc"
