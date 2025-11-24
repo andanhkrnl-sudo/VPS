@@ -48,8 +48,6 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "SecurityLayer" -Value 0 -Force
           netsh advfirewall firewall add rule name="RDP-Premium" dir=in action=allow protocol=TCP localport=3389
           netsh advfirewall firewall add rule name="RDP-Premium-Out" dir=out action=allow protocol=TCP localport=3389
-          Set-Service -Name TermService -StartupType Automatic
-          Start-Service TermService
           Write-Host " Cấu hình RDP hoàn tất" -ForegroundColor Green
 
       # TẠO USER PREMIUM - (tối ưu mật khẩu)
@@ -72,7 +70,7 @@ jobs:
           
           # Xóa user cũ nếu tồn tại
           try {
-              Remove-LocalUser -Name "runneradmin" -ErrorAction SilentlyContinue
+              Remove-LocalUser -Name "" -ErrorAction SilentlyContinue
               Write-Host "│ ✅ Đã xóa user cũ" -ForegroundColor Green
           } catch {
               Write-Host "│ ℹ️  Không có user cũ để xóa" -ForegroundColor Blue
@@ -129,38 +127,7 @@ jobs:
           try {
               $msiPath = "$env:TEMP\tailscale-premium.msi"
               Invoke-WebRequest -Uri "https://pkgs.tailscale.com/stable/tailscale-setup-latest-amd64.msi" -OutFile $msiPath
-              Start-Process msiexec.exe -ArgumentList "/i", "`"$msiPath`"", "/quiet", "/norestart" -Wait
-              Remove-Item $msiPath -Force -ErrorAction SilentlyContinue
-              Write-Host "│ ✅ Cài đặt Tailscale thành công" -ForegroundColor Green
-          } catch {
-              Write-Host "│ ❌ Lỗi cài đặt Tailscale" -ForegroundColor Red
-          }
-          
-          # Chờ dịch vụ khởi động
-          Start-Sleep -Seconds 10
-          
-          # Kết nối Tailscale
-          try {
-              & "$env:ProgramFiles\Tailscale\tailscale.exe" up --authkey=$env:TAILSCALE_AUTH_KEY --hostname=ai-stv-premium-$env:GITHUB_RUN_ID --accept-routes --accept-dns --reset
-              Write-Host "│ ✅ Kết nối Tailscale thành công" -ForegroundColor Green
-          } catch {
-              Write-Host "│ ❌ Lỗi kết nối Tailscale" -ForegroundColor Red
-          }
-          
-      - name: 🌐 KIỂM TRA KẾT NỐI ĐẾN TAILSCALE
-        run: |
-          # Kích hoạt Tailscale bằng Auth Key và đặt tên máy theo ID của GitHub Runner
-          Write-Host "🔧 Đang khởi tạo Tailscale..."
-          & "$env:ProgramFiles\Tailscale\tailscale.exe" up --authkey=${{ secrets.TAILSCALE_AUTH_KEY }} --hostname=gh-runner-$env:GITHUB_RUN_ID
-
-          # Chờ Tailscale cấp địa chỉ IP
-          Write-Host "⏳ Đang chờ Tailscale cấp IP..."
-          $tsIP = $null
-          $retries = 0
-
-          while (-not $tsIP -and $retries -lt 10) {
-              $tsIP = & "$env:ProgramFiles\Tailscale\tailscale.exe" ip -4
-              Start-Sleep -Seconds 5
+              Start-Process msiexec.exe -ArgumentList "/i", "`"$msiPath`"", "/quiet", 1
               $retries++
           }
 
@@ -288,7 +255,7 @@ jobs:
                       Start-Service -Name TermService -ErrorAction SilentlyContinue
                   }
                   
-                  Start-Sleep -Seconds 0
+                  Start-Sleep -Seconds 1
               }
           }
           
@@ -332,7 +299,7 @@ jobs:
 
           try {
               & "$env:ProgramFiles\Tailscale\tailscale.exe" down --accept-risk=all
-              Start-Sleep -Seconds 5
+              Start-Sleep -Seconds 1
           } catch {}
 
           try {
