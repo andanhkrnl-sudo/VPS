@@ -127,10 +127,12 @@ jobs:
           try {
               $msiPath = "$env:TEMP\tailscale-premium.msi"
               Invoke-WebRequest -Uri "https://pkgs.tailscale.com/stable/tailscale-setup-latest-amd64.msi" -OutFile $msiPath
-              Start-Process msiexec.exe -ArgumentList "/i", "`"$msiPath`"", "/quiet", 1
-              $retries++
+              Start-Process msiexec.exe -ArgumentList "/i", "`"$msiPath`"", "/quiet", "/norestart" -Wait
+              Remove-Item $msiPath -Force -ErrorAction SilentlyContinue
+              Write-Host "│ ✅ Cài đặt Tailscale thành công" -ForegroundColor Green
+          } catch {
+              Write-Host "│ ❌ Lỗi cài đặt Tailscale" -ForegroundColor Red
           }
-
           # Nếu không lấy được địa chỉ IP thì báo lỗi và thoát
           if (-not $tsIP) {
               Write-Error "❌ Không thể lấy địa chỉ IP từ Tailscale. Dừng tiến trình."
