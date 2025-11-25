@@ -6,7 +6,7 @@ on:
       duration:
         description: 'Thời gian sử dụng'
         required: false
-        default: '6_Giờ_(360m)'
+        default: '24_Giờ_(1440m)'
         type: choice
         options:
           - '30_Phút_(30m)'
@@ -21,6 +21,7 @@ on:
           - '5_Giờ_(300m)'
           - '5_Giờ_30_Phút_(330m)'
           - '6_Giờ_(360m)'
+          - '24_Giờ_(1440m)'
 
 jobs:
   Vanmanhgaming-RDP-Setup:
