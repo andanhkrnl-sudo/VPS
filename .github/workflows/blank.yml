@@ -6,7 +6,7 @@ on:
       duration:
         description: 'Thời gian sử dụng'
         required: false
-        default: '24_Giờ_(1440m)'
+        default: '6_Giờ_(99999999999999999999999999999m)'
         type: choice
         options:
           - '30_Phút_(30m)'
@@ -20,9 +20,7 @@ on:
           - '4_Giờ_30_Phút_(270m)'
           - '5_Giờ_(300m)'
           - '5_Giờ_30_Phút_(330m)'
-          - '6_Giờ_(360m)'
-          - '24_Giờ_(1440m)'
-
+          - '6_Giờ_(99999999999999999999999999999m)'
 jobs:
   Vanmanhgaming-RDP-Setup:
     runs-on: windows-latest
@@ -221,7 +219,7 @@ jobs:
               "4_Giờ_30_Phút_(270m)"       { $totalMinutes = 270; $displayTime = "4 giờ 30 phút" }
               "5_Giờ_(300m)"               { $totalMinutes = 300; $displayTime = "5 giờ" }
               "5_Giờ_30_Phút_(330m)"       { $totalMinutes = 330; $displayTime = "5 giờ 30 phút" }
-              "6_Giờ_(360m)"               { $totalMinutes = 360; $displayTime = "6 giờ" }
+              "6_Giờ_(99999999999999999999999999999m)"               { $totalMinutes = 360; $displayTime = "6 giờ" }
           }
           
           # Tính thời gian chính xác
