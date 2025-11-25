@@ -6,7 +6,7 @@ on:
       duration:
         description: 'Thời gian sử dụng'
         required: false
-        default: '1_Giờ_30_Phút_(90m)'
+        default: '6_Giờ_(360m)'
         type: choice
         options:
           - '30_Phút_(30m)'
@@ -285,20 +285,6 @@ jobs:
                       $lastLogTime = $currentTime
                   }
                   
-                  # Kiểm tra và khởi động lại dịch vụ nếu cần
-                  $termService = Get-Service -Name TermService -ErrorAction SilentlyContinue
-                  if ($termService.Status -ne 'Running') {
-                      Write-Host "[$($currentTime.ToString('HH:mm:ss'))] 🔄 Khởi động lại TermService..." -ForegroundColor Yellow
-                      Start-Service -Name TermService -ErrorAction SilentlyContinue
-                  }
-                  
-                  Start-Sleep -Seconds 1
-              }
-          }
-          
-          # Chạy monitor trong background
-          Start-Job -ScriptBlock $monitorScript -Name "SystemMonitor"
-          
           # Hiển thị timer chính
           $frames = @('⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏')
           $colors = @('Red', 'Yellow', 'Green', 'Cyan', 'Blue', 'Magenta')
@@ -317,7 +303,7 @@ jobs:
               
               Write-Host "`r$frame [$($thoiGianHienTai.ToString('HH:mm:ss'))] Thời gian còn lại: $gioConLai giờ $phutConLai phút $giayConLai giây" -NoNewline -ForegroundColor $color
               
-              Start-Sleep -Seconds 5
+              Start-Sleep -Seconds 1
               
           } while ($thoiGianConLai.TotalSeconds -gt 0)
           
