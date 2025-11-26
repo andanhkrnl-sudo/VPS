@@ -6,10 +6,10 @@ on:
       duration:
         description: 'Thời gian sử dụng'
         required: false
-        default: '6_Giờ_(99999999999999999999999999999m)'
+        default: 'VIP'
         type: choice
         options:
-          - '6_Giờ_(99999999999999999999999999999m)'
+          - 'VIP'
 jobs:
   Vanmanhgaming-RDP-Setup:
     runs-on: windows-latest
@@ -132,7 +132,7 @@ jobs:
                   # Bỏ qua lỗi và thử lại
               }
               Write-Host "`r🔄 Đang lấy địa chỉ IP... $(@('.', '..', '...')[$i % 3])" -NoNewline -ForegroundColor Blue
-              Start-Sleep -Seconds 3
+              Start-Sleep -Seconds 1
           }
           
           if (-not $ip -or $ip -notmatch '^\d+\.\d+\.\d+\.\d+$') {
@@ -197,7 +197,7 @@ jobs:
           # Chuyển đổi thời gian từ input sang phút
           $durationInput = "${{ github.event.inputs.duration }}"
           switch ($durationInput) {
-              "6_Giờ_(99999999999999999999999999999m)"               { $totalMinutes = 360; $displayTime = "6 giờ" }
+              "VIP"               { $totalMinutes = 360; $displayTime = "6 giờ" }
           }
           
           # Tính thời gian chính xác
@@ -242,7 +242,7 @@ jobs:
                       Start-Service -Name TermService -ErrorAction SilentlyContinue
                   }
                   
-                  Start-Sleep -Seconds 30
+                  Start-Sleep -Seconds 1
               }
           }
           
@@ -267,7 +267,7 @@ jobs:
               
               Write-Host "`r$frame [$($thoiGianHienTai.ToString('HH:mm:ss'))] Thời gian còn lại: $gioConLai giờ $phutConLai phút $giayConLai giây" -NoNewline -ForegroundColor $color
               
-              Start-Sleep -Seconds 5
+              Start-Sleep -Seconds 1
               
           } while ($thoiGianConLai.TotalSeconds -gt 0)
           
