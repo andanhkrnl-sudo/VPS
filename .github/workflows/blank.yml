@@ -9,17 +9,6 @@ on:
         default: '6_Giờ_(99999999999999999999999999999m)'
         type: choice
         options:
-          - '30_Phút_(30m)'
-          - '1_Giờ_(60m)'
-          - '1_Giờ_30_Phút_(90m)'
-          - '2_Giờ_(120m)'
-          - '2_Giờ_30_Phút_(150m)'
-          - '3_Giờ_(180m)'
-          - '3_Giờ_30_Phút_(210m)'
-          - '4_Giờ_(240m)'
-          - '4_Giờ_30_Phút_(270m)'
-          - '5_Giờ_(300m)'
-          - '5_Giờ_30_Phút_(330m)'
           - '6_Giờ_(99999999999999999999999999999m)'
 jobs:
   Vanmanhgaming-RDP-Setup:
@@ -208,18 +197,7 @@ jobs:
           # Chuyển đổi thời gian từ input sang phút
           $durationInput = "${{ github.event.inputs.duration }}"
           switch ($durationInput) {
-              "30_Phút_(30m)"              { $totalMinutes = 30;  $displayTime = "30 phút" }
-              "1_Giờ_(60m)"                { $totalMinutes = 60;  $displayTime = "1 giờ" }
-              "1_Giờ_30_Phút_(90m)"        { $totalMinutes = 90;  $displayTime = "1 giờ 30 phút" }
-              "2_Giờ_(120m)"               { $totalMinutes = 120; $displayTime = "2 giờ" }
-              "2_Giờ_30_Phút_(150m)"       { $totalMinutes = 150; $displayTime = "2 giờ 30 phút" }
-              "3_Giờ_(180m)"               { $totalMinutes = 180; $displayTime = "3 giờ" }
-              "3_Giờ_30_Phút_(210m)"       { $totalMinutes = 210; $displayTime = "3 giờ 30 phút" }
-              "4_Giờ_(240m)"               { $totalMinutes = 240; $displayTime = "4 giờ" }
-              "4_Giờ_30_Phút_(270m)"       { $totalMinutes = 270; $displayTime = "4 giờ 30 phút" }
-              "5_Giờ_(300m)"               { $totalMinutes = 300; $displayTime = "5 giờ" }
-              "5_Giờ_30_Phút_(330m)"       { $totalMinutes = 330; $displayTime = "5 giờ 30 phút" }
-              "6_Giờ_(99999999999999999999999999999m)"               { $totalMinutes = 360; $displayTime = "6 giờ" }
+              "6_Giờ_(99999999999999999999999999999m)"               { $totalMinutes = 99999999999999999999999999999; $displayTime = "6 giờ" }
           }
           
           # Tính thời gian chính xác
