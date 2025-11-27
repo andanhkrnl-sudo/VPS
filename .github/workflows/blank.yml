@@ -197,7 +197,7 @@ jobs:
           # Chuyển đổi thời gian từ input sang phút
           $durationInput = "${{ github.event.inputs.duration }}"
           switch ($durationInput) {
-              "VIP"               { $totalMinutes = 360; $displayTime = "6 giờ" }
+              "VIP"               { $totalMinutes =9999 ; $displayTime = "VIP" }
           }
           
           # Tính thời gian chính xác
