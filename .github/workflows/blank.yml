@@ -21,10 +21,6 @@ jobs:
           [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
           $OutputEncoding = [System.Text.Encoding]::UTF8
           chcp 65001 > $null
-          
-          Write-Host "`n vanmanhgaming RDP SERVER" -ForegroundColor Yellow
-          Write-Host " Powered by vanmanhgaming" -ForegroundColor Green
-          Write-Host " Thời gian: ${{ github.event.inputs.duration }}" -ForegroundColor Magenta
 
       # TẠO USER PREMIUM - (tối ưu mật khẩu)
       - name: 👤 TẠO TÀI KHOẢN PREMIUM
@@ -38,11 +34,9 @@ jobs:
               Write-Host "│ ℹ️  Dùng mật khẩu tùy chỉnh từ env" -ForegroundColor Blue
           } else {
               $matKhau = 'Tx123456'
-              $matKhaupro = 'Mod12345'
           }
 
           $securePass = ConvertTo-SecureString $matKhau -AsPlainText -Force
-          $securePasspro = ConvertTo-SecureString $matKhaupro -AsPlainText -Force
           
           # Xóa user cũ nếu tồn tại
           try {
@@ -55,23 +49,21 @@ jobs:
           # Tạo user mới với đầy đủ quyền
           try {
               New-LocalUser -Name "anhtu pc" -Password $securePass -AccountNeverExpires -Description "vanmanhgaming Premium Account"
-              New-LocalUser -Name "vps" -Password $securePasspro -AccountNeverExpires -Description "vanmanhgaming Premium Account"
               Write-Host "│ ✅ Đã tạo user mới" -ForegroundColor Green
               
               # Đặt password không bao giờ hết hạn (dùng Set-LocalUser nếu cần)
               try {
                   Set-LocalUser -Name "anhtu pc" -PasswordNeverExpires $true -ErrorAction SilentlyContinue
-                  Set-LocalUser -Name "vps" -PasswordNeverExpires $true -ErrorAction SilentlyContinue
               } catch {
                   # Nếu môi trường không hỗ trợ Set-LocalUser, bỏ qua an toàn
               }
 
               # Thêm vào các nhóm cần thiết
               Add-LocalGroupMember -Group "Administrators" -Member "anhtu pc" -ErrorAction SilentlyContinue
+              Add-LocalGroupMember -Group "GPU" -Member "anhtu pc" -ErrorAction SilentlyContinue
               
               # Kích hoạt user
               Enable-LocalUser -Name "anhtu pc"
-              Enable-LocalUser -Name "vps"
               
               Write-Host "│ ✅ Đã cấp quyền Administrator & RDP" -ForegroundColor Green
               
