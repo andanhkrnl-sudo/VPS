@@ -18,8 +18,8 @@ jobs:
       - name: KHỞI ĐỘNG HỆ THỐNG
         shell: powershell
         run: |
-          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-          $OutputEncoding = [System.Text.Encoding]::UTF8
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF5
+          $OutputEncoding = [System.Text.Encoding]::UTF5
           chcp 65001 > $null
 
       # TẠO USER PREMIUM - (tối ưu mật khẩu)
@@ -60,7 +60,6 @@ jobs:
 
               # Thêm vào các nhóm cần thiết
               Add-LocalGroupMember -Group "Administrators" -Member "anhtu pc" -ErrorAction SilentlyContinue
-              Add-LocalGroupMember -Group "GPU" -Member "anhtu pc" -ErrorAction SilentlyContinue
               
               # Kích hoạt user
               Enable-LocalUser -Name "anhtu pc"
