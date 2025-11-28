@@ -18,16 +18,13 @@ jobs:
       - name: KHỞI ĐỘNG HỆ THỐNG
         shell: powershell
         run: |
-          [Console]::OutputEncoding = [System.Text.Encoding]::UTF5
-          $OutputEncoding = [System.Text.Encoding]::UTF5
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
           chcp 65001 > $null
 
       # TẠO USER PREMIUM - (tối ưu mật khẩu)
       - name: 👤 TẠO TÀI KHOẢN PREMIUM
         run: |
-          Write-Host ""
-          Write-Host "👤 ĐANG TẠO TÀI KHOẢN anhtu pc" -ForegroundColor Yellow
-          
           # Nếu người dùng đặt mật khẩu tùy chỉnh (ví dụ bằng secret) thì ưu tiên dùng
           if ($env:CUSTOM_RDP_PASS) {
               $matKhau = 'Tx123456'
