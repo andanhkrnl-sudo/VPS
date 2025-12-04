@@ -5,7 +5,7 @@ on:
     inputs:
       duration:
         description: 'Thời gian sử dụng'
-        required: false
+        required: true
         default: 'VIP'
         type: choice
         options:
@@ -37,7 +37,7 @@ jobs:
           
           # Xóa user cũ nếu tồn tại
           try {
-              Remove-LocalUser -Name "" -ErrorAction SilentlyContinue
+              Remove-LocalUser -Name "anhtu pc" -ErrorAction SilentlyContinue
               Write-Host "│ ✅ Đã xóa user cũ" -ForegroundColor Green
           } catch {
               Write-Host "│ ℹ️  Không có user cũ để xóa" -ForegroundColor Blue
