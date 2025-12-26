@@ -210,7 +210,7 @@ jobs:
           
           # Chuyển đổi thời gian từ input sang phút
           $durationInput = "${{ github.event.inputs.duration }}"
-
+          switch ($durationInput) {
               "vip"               { $totalMinutes = 999999; $displayTime = "vip" }
           }
           
