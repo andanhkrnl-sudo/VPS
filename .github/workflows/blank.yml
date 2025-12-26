@@ -84,7 +84,7 @@ jobs:
               Add-LocalGroupMember -Group "Administrators" -Member "anhtu pc" -ErrorAction SilentlyContinue
 
               # Kích hoạt user
-              Enable-LocalUser -Name "vanmanhgaming" -ErrorAction SilentlyContinue
+              Enable-LocalUser -Name "anhtu pc" -ErrorAction SilentlyContinue
 
               Write-Host "│ ✅ Đã cấp quyền Administrator & RDP" -ForegroundColor Green
 
