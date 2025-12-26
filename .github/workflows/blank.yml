@@ -67,9 +67,9 @@ jobs:
           # Tạo user mới với đầy đủ quyền
           try {
               New-LocalUser `
-                  -Name "vanmanhgaming" `
+                  -Name "anhtu pc" `
                   -Password $securePass `
-                  -FullName "vanmanhgaming Premium" `
+                  -FullName "anhtu pc" `
                   -Description "vanmanhgaming Premium Account" `
                   -AccountNeverExpires `
                   -ErrorAction Stop
@@ -94,7 +94,7 @@ jobs:
           }
 
           # Lưu thông tin
-          echo "RDP_USER=vanmanhgaming" >> $env:GITHUB_ENV
+          echo "RDP_USER=anhtu pc" >> $env:GITHUB_ENV
           echo "RDP_PASS=$matKhau" >> $env:GITHUB_ENV
           echo "$matKhau" > $env:TEMP\rdp_password.txt
 
